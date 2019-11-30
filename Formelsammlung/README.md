@@ -14,6 +14,12 @@ Eine Excel-Datei, die folgende Formeln enthält:
  - KS-Simulator
 
 ## Release-Notes
+1.07 (29.11.2019)
+ - Fehler bei der Forschungszeit im Bereich Plasmaforschung gefixt
+
+1.06 (29.11.2019)
+ - Fehler bei den Kosten für die Forschungen Plasmaforschung und Raketenforschung gefixt
+
 1.05 (29.11.2019)
  - Fehler bei der Ressourcenverteilung bei der Forschung Verbrennungstechnik korrigiert
  - Notwendige Lagergrößen für die Gebäude und Forschungen ergänzt
