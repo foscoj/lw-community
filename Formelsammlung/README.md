@@ -7,6 +7,7 @@ Eine Excel-Datei, die folgende Formeln enthält:
  - Forschung: Kosten, Forschungszeit und benötigte Lager
  - Rohstoffe: Produktion in Abhängigkeit von Planetenklasse und Rasse
  - Lagerkapazität
+ - Bankkapazität
  - Tagesproduktion
  - Frühwarnradius
  - Tarnreichweite
@@ -14,6 +15,11 @@ Eine Excel-Datei, die folgende Formeln enthält:
  - KS-Simulator
 
 ## Release-Notes
+1.08 (05.12.2019)
+ - Flugzeitrechner ergänzt: Anhand der Entfernung und der Flugdauer kann nun die verwendete Antriebsart und Geschwindigkeit berechnet werden
+ - KS-Simulator von 5:1 auf 3:1 (LW Update vom 04.12.2019) umgestellt
+ - Reiter mit der Bankkapazität hinzugefügt
+
 1.07 (29.11.2019)
  - Fehler bei der Forschungszeit im Bereich Plasmaforschung gefixt
 
