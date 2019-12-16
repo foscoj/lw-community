@@ -13,8 +13,15 @@ Eine Excel-Datei, die folgende Formeln enthält:
  - Tarnreichweite
  - Flugzeitrechner
  - KS-Simulator
+ - GDZ-Rechner
 
 ## Release-Notes
+1.10 (15.12.2019)
+ - Bonusberechnung bei der Kristall-Fördermenge bei den Rohstoffen korrigiert
+
+1.09 (15.12.2019)
+ - Reiter Geheimdienstzentrum hinzugefügt, mit dessen Hilfe man sich die Erfolgschancen der einzelnen Aktionen berechnen lassen kann, sowie die Kosten nach Eingabe der Konstruktionen und Forschungen des Zielplaneten
+
 1.08 (05.12.2019)
  - Flugzeitrechner ergänzt: Anhand der Entfernung und der Flugdauer kann nun die verwendete Antriebsart und Geschwindigkeit berechnet werden
  - KS-Simulator von 5:1 auf 3:1 (LW Update vom 04.12.2019) umgestellt
