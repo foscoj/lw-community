@@ -5,6 +5,10 @@ Eine Excel-Datei, mit der sich Schiffe für Last-War designen lassen.
 
 ## Release-Notes
 
+2.4 (15.12.2019)
+
+ - Kosten des Antimaterietorpedos korrigiert
+
 2.3 (08.12.2019)
 
  - Rassenboni für die Schiffskompnenten aktualisiert
