@@ -1,0 +1,429 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Datensammlung Spionage</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" integrity="sha256-UXesixbeLkB/UYxVTzuj/gg3+LMzgwAmg3zD+C4ZASQ=" crossorigin="anonymous">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <div class="ui container">
+      <h1>Datensammlung Spionage</h1>
+
+      <form id="evaluate" class="ui form">
+          <h4 class="ui dividing header">Spion</h4>
+          <div class="four fields">
+              <div class="field">
+                  <label>Spionagestation</label>
+                  <input type="text" id="s_sta" name="s_sta">
+              </div>
+              <div class="field">
+                  <label>Spionageabwehr</label>
+                  <input type="text" id="s_abw" name="s_sta">
+              </div>
+              <div class="field">
+                  <label>Spionage</label>
+                  <input type="text" id="s_spi" name="s_sta">
+              </div>
+              <div class="field">
+                  <label>Erweiterte Spionage</label>
+                  <input type="text" id="s_esp" name="s_sta">
+              </div>
+          </div>
+          <h4 class="ui dividing header">Opfer</h4>
+          <div class="four fields">
+              <div class="field">
+                  <label>Spionagestation</label>
+                  <input type="text" id="o_sta" name="s_sta">
+              </div>
+              <div class="field">
+                  <label>Spionageabwehr</label>
+                  <input type="text" id="o_abw" name="s_sta">
+              </div>
+              <div class="field">
+                  <label>Spionage</label>
+                  <input type="text" id="o_spi" name="s_sta">
+              </div>
+              <div class="field">
+                  <label>Erweiterte Spionage</label>
+                  <input type="text" id="o_esp" name="s_sta">
+              </div>
+          </div>
+          <div id="button_evaluate" class="ui submit button">Auswerten</div>
+      </form>
+
+      <table id="data" class="ui sortable celled table">
+          <thead>
+              <tr>
+                  <th colspan="4" class="no-sort">Spion</th>
+                  <th colspan="4" class="no-sort">Opfer</th>
+                  <th colspan="2" class="no-sort">Erfolg</th>
+              </tr>
+              <tr>
+                  <th class="int">Sta</th>
+                  <th class="int">Abw</th>
+                  <th class="int">Spi</th>
+                  <th class="int">ESp</th>
+                  <th class="int">Sta</th>
+                  <th class="int">Abw</th>
+                  <th class="int">Spi</th>
+                  <th class="int">ESp</th>
+                  <th>Sonde</th>
+                  <th>Obs</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td class="right aligned">12</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">22</td>
+                  <td class="right aligned">18</td>
+                  <td class="right aligned">26</td>
+                  <td class="right aligned">5</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">12</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">2</td>
+                  <td class="right aligned">26</td>
+                  <td class="right aligned">25</td>
+                  <td class="right aligned">5</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">12</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">5</td>
+                  <td class="right aligned">22</td>
+                  <td class="right aligned">45</td>
+                  <td class="right aligned">6</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">12</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">27</td>
+                  <td class="right aligned">16</td>
+                  <td class="right aligned">27</td>
+                  <td class="right aligned">7</td>
+                  <td class="negative center aligned">Nein</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">13</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">27</td>
+                  <td class="right aligned">16</td>
+                  <td class="right aligned">27</td>
+                  <td class="right aligned">7</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">13</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">18</td>
+                  <td class="right aligned">22</td>
+                  <td class="right aligned">15</td>
+                  <td class="right aligned">4</td>
+                  <td class="negative center aligned">Nein</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">17</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">18</td>
+                  <td class="right aligned">22</td>
+                  <td class="right aligned">15</td>
+                  <td class="right aligned">4</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">12</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">20</td>
+                  <td class="right aligned">20</td>
+                  <td class="right aligned">43</td>
+                  <td class="right aligned">8</td>
+                  <td class="negative center aligned">Nein</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">20</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">20</td>
+                  <td class="right aligned">20</td>
+                  <td class="right aligned">43</td>
+                  <td class="right aligned">8</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">18</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">14</td>
+                  <td class="right aligned">25</td>
+                  <td class="right aligned">21</td>
+                  <td class="right aligned">5</td>
+                  <td class="negative center aligned">Nein</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">20</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">38</td>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">14</td>
+                  <td class="right aligned">25</td>
+                  <td class="right aligned">21</td>
+                  <td class="right aligned">5</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">20</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">44</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">30</td>
+                  <td class="right aligned">22</td>
+                  <td class="right aligned">78</td>
+                  <td class="right aligned">19</td>
+                  <td class="negative center aligned">Nein</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">21</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">44</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">30</td>
+                  <td class="right aligned">22</td>
+                  <td class="right aligned">78</td>
+                  <td class="right aligned">19</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">7</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">28</td>
+                  <td class="right aligned">6</td>
+                  <td class="right aligned">5</td>
+                  <td class="right aligned">18</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">2</td>
+                  <td class="negative center aligned">Nein</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">8</td>
+                  <td class="right aligned">0</td>
+                  <td class="right aligned">28</td>
+                  <td class="right aligned">6</td>
+                  <td class="right aligned">5</td>
+                  <td class="right aligned">18</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">2</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">34</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">44</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">28</td>
+                  <td class="right aligned">29</td>
+                  <td class="right aligned">22</td>
+                  <td class="right aligned">8</td>
+                  <td class="negative center aligned">Nein</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">34</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">52</td>
+                  <td class="right aligned">13</td>
+                  <td class="right aligned">28</td>
+                  <td class="right aligned">29</td>
+                  <td class="right aligned">22</td>
+                  <td class="right aligned">8</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">34</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">44</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">34</td>
+                  <td class="right aligned">31</td>
+                  <td class="right aligned">39</td>
+                  <td class="right aligned">13</td>
+                  <td class="negative center aligned">Nein</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">34</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">52</td>
+                  <td class="right aligned">13</td>
+                  <td class="right aligned">34</td>
+                  <td class="right aligned">31</td>
+                  <td class="right aligned">39</td>
+                  <td class="right aligned">13</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">33</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">44</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">23</td>
+                  <td class="right aligned">34</td>
+                  <td class="right aligned">62</td>
+                  <td class="right aligned">14</td>
+                  <td class="negative center aligned">Nein</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">34</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">52</td>
+                  <td class="right aligned">13</td>
+                  <td class="right aligned">23</td>
+                  <td class="right aligned">34</td>
+                  <td class="right aligned">62</td>
+                  <td class="right aligned">14</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">23</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">44</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">27</td>
+                  <td class="right aligned">27</td>
+                  <td class="right aligned">76</td>
+                  <td class="right aligned">19</td>
+                  <td class="negative center aligned">Nein</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+              <tr>
+                  <td class="right aligned">23</td>
+                  <td class="right aligned">10</td>
+                  <td class="right aligned">52</td>
+                  <td class="right aligned">13</td>
+                  <td class="right aligned">27</td>
+                  <td class="right aligned">27</td>
+                  <td class="right aligned">76</td>
+                  <td class="right aligned">19</td>
+                  <td class="positive center aligned">Ja</td>
+                  <td class="warning center aligned">-</td>
+              </tr>
+          </tbody>
+      </table>
+
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js" integrity="sha256-CgSoWC9w5wNmI1aN8dIMK+6DPelUEtvDr+Bc2m/0Nx8=" crossorigin="anonymous"></script>
+  <!--  <script src="https://semantic-ui.com/javascript/library/tablesort.js" crossorigin="anonymous"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery-tablesort@0.0.11/jquery.tablesort.min.js" integrity="sha256-2N0hMqOUWrnnwHS+QxWycq1c9kZO/+NHoJSziOI2DI4=" crossorigin="anonymous"></script>
+
+  <script>
+      function evaluate_spi() {
+          let factor = {
+              's_sta': parseInt($('#s_sta').val()) || 0,
+              's_abw': parseInt($('#s_abw').val()) || 0,
+              's_spi': parseInt($('#s_spi').val()) || 0,
+              's_esp': parseInt($('#s_esp').val()) || 0,
+              'o_sta': parseInt($('#o_sta').val()) || 0,
+              'o_abw': parseInt($('#o_abw').val()) || 0,
+              'o_spi': parseInt($('#o_spi').val()) || 0,
+              'o_esp': parseInt($('#o_esp').val()) || 0,
+          };
+
+          $('#data tbody tr').each(function(index, element) { 
+              let children = $(this).children();
+
+              let value = {
+                  's_sta': parseInt($(children[0]).text()) || 0,
+                  's_abw': parseInt($(children[1]).text()) || 0,
+                  's_spi': parseInt($(children[2]).text()) || 0,
+                  's_esp': parseInt($(children[3]).text()) || 0,
+                  'o_sta': parseInt($(children[4]).text()) || 0,
+                  'o_abw': parseInt($(children[5]).text()) || 0,
+                  'o_spi': parseInt($(children[6]).text()) || 0,
+                  'o_esp': parseInt($(children[7]).text()) || 0,
+              };
+
+              let result = factor['s_sta'] * value['s_sta'] + 
+                  factor['s_abw'] * value['s_abw'] +
+                  factor['s_spi'] * value['s_spi'] +
+                  factor['s_esp'] * value['s_esp'] -
+                  factor['o_sta'] * value['o_sta'] -
+                  factor['o_abw'] * value['o_abw'] -
+                  factor['o_spi'] * value['o_spi'] -
+                  factor['o_esp'] * value['o_esp'];
+
+              console.log(`${factor['s_sta']}*${value['s_sta']} + ${factor['s_abw']}*${value['s_abw']} + ${factor['s_spi']}*${value['s_spi']} + ${factor['s_esp']}*${value['s_esp']} ${result > 0 ? '>' : '<'} ${factor['o_sta']}*${value['o_sta']} + ${factor['o_abw']}*${value['o_abw']} + ${factor['o_spi']}*${value['o_spi']} + ${factor['o_esp']}*${value['o_esp']}`); 
+              console.log($(children[8]).text());
+              if(($(children[8]).text() == 'Ja') && (result > 0)) {
+                  console.log('true');
+              }
+              else if(($(children[8]).text() == 'Nein') && (result <= 0)) {
+                  console.log('true');
+              } else {
+                  console.log('false');
+              }
+          });
+          return false;
+      }
+      $('table').tablesort();
+      
+      $('thead th.int').data('sortBy', function(th, td, tablesort) { return parseInt(td.text()); });
+
+      $('#button_evaluate').click(evaluate_spi);
+  </script>
+</body>
+
+</html>
+
+
