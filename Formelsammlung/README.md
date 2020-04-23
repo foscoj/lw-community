@@ -16,6 +16,9 @@ Eine Excel-Datei, die folgende Formeln enthält:
  - GDZ-Rechner
 
 ## Release-Notes
+1.11 (28.12.2019)
+ - Kosten für die "Erweiterte Technologiespionage" wurde um 50% erhöht --> Anpassung der Excel
+
 1.10 (15.12.2019)
  - Bonusberechnung bei der Kristall-Fördermenge bei den Rohstoffen korrigiert
 
