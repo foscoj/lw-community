@@ -53,7 +53,6 @@ class Resources {
     }
 
     setResources(resources, resourcesPerHour) {
-        GM_log(Date + ': resources changed!');
         this.resources = resources;
         this.resourcesPerHour = resourcesPerHour;
         this.timestamp = Date.now();
@@ -108,6 +107,7 @@ class Resources {
         unsafeWindow.resourcesUpdateFunc = unsafeWindow.resources.onmessage;
 
         unsafeWindow.stopWorkerForResource();
+        unsafeWindow.stopWorkerForResource = function() {};
 
         let resources = { 'roheisen': unsafeWindow.Roheisen, 'kristall': unsafeWindow.Kristall, 'frubin': unsafeWindow.Frubin, 'orizin': unsafeWindow.Orizin, 'frurozin': unsafeWindow.Frurozin, 'gold': unsafeWindow.Gold }
 
@@ -116,15 +116,11 @@ class Resources {
         unsafeWindow.resourceShadow.update();
 
 
-
-        GM_log(unsafeWindow);
-
         unsafeWindow.resourceUpdateTimer = setInterval(updateResources, 1000);
     }
 
     function updateResources() {
         if (unsafeWindow.resourceShadow.hasChanged()) {
-            GM_log(Date.now() + ': Change detected');
             let resources = { 'roheisen': unsafeWindow.Roheisen, 'kristall': unsafeWindow.Kristall, 'frubin': unsafeWindow.Frubin, 'orizin': unsafeWindow.Orizin, 'frurozin': unsafeWindow.Frurozin, 'gold': unsafeWindow.Gold }
 
             let resourcesPerHour = unsafeWindow.getResourcePerHour()[0];
