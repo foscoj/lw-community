@@ -1,62 +1,30 @@
 // ==UserScript==
 // @name         lw_fix_res_update
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.1.2
 // @description  Fix the Resource-Update in LW
 // @author       FQS
 // @match        https://*.last-war.de/main.php*
 // @grant        GM_log
 // ==/UserScript==
 
-class Shadow {
-    constructor(window) {
-        this.window = window;
-        this.variables = [];
-        this.storage = {};
-    }
-
-    addVariable(name) {
-        this.variables.push(name);
-        this.storage[name] = this.window[name];
-    }
-
-    update() {
-        for (let variable of this.variables) {
-            this.storage[variable] = this.window[variable];
-        }
-    }
-
-    hasChanged() {
-        for (let variable of this.variables) {
-            if (this.storage[variable] != this.window[variable]) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
 
 class Resources {
-    constructor(resources, resourcesPerHour) {
+    constructor(resources, resourcesPerHour, resourcesCapacity, resourceUpdateFunction) {
         this.resources = resources;
         this.resourcesPerHour = resourcesPerHour;
+        this.resourcesCapacity = resourcesCapacity;
         this.timestamp = Date.now();
-        this.tainted = false;
-    }
+        this.resourceUpdateFunction = resourceUpdateFunction;
 
-    taint() {
-        this.tainted = true;
-    }
-
-    isTainted() {
-        return this.tainted;
+        this.resourceUpdateTimer = setInterval(() => { this.resourceUpdateFunction({data: this.getResources()}); }, 1000);
     }
 
     setResources(resources, resourcesPerHour) {
         this.resources = resources;
         this.resourcesPerHour = resourcesPerHour;
         this.timestamp = Date.now();
-        this.tainted = false;
+        GM_log(this.resources, this.resourcesPerHour);
     }
 
     getResources() {
@@ -64,7 +32,7 @@ class Resources {
         let resources = [];
 
         for (let resource of ['roheisen', 'kristall', 'frubin', 'orizin', 'frurozin', 'gold']) {
-            resources.push(this.resources[resource] + this.resourcesPerHour[resource] * (now - this.timestamp) / 1000 / 60 / 60);
+            resources.push(Math.min(this.resources[resource] + this.resourcesPerHour[resource] * (now - this.timestamp) / 1000 / 60 / 60, this.resourcesCapacity[resource]));
         }
 
         return resources;
@@ -77,59 +45,41 @@ class Resources {
     setup();
 
     function setup() {
-        unsafeWindow.resourceShadow = new Shadow(unsafeWindow);
-        unsafeWindow.resourceShadow.addVariable('Energy');
-        unsafeWindow.resourceShadow.addVariable('lvlRoheisen');
-        unsafeWindow.resourceShadow.addVariable('lvlKristall');
-        unsafeWindow.resourceShadow.addVariable('lvlFrubin');
-        unsafeWindow.resourceShadow.addVariable('lvlOrizin');
-        unsafeWindow.resourceShadow.addVariable('lvlFrurozin');
-        unsafeWindow.resourceShadow.addVariable('lvlGold');
-        unsafeWindow.resourceShadow.addVariable('lvlRoheisenLager');
-        unsafeWindow.resourceShadow.addVariable('lvlKristallLager');
-        unsafeWindow.resourceShadow.addVariable('lvlFrubinLager');
-        unsafeWindow.resourceShadow.addVariable('lvlOrizinLager');
-        unsafeWindow.resourceShadow.addVariable('lvlFrurozinLager');
-        unsafeWindow.resourceShadow.addVariable('lvlGoldLager');
-        unsafeWindow.resourceShadow.addVariable('Roheisen');
-        unsafeWindow.resourceShadow.addVariable('Kristall');
-        unsafeWindow.resourceShadow.addVariable('Frubin');
-        unsafeWindow.resourceShadow.addVariable('Orizin');
-        unsafeWindow.resourceShadow.addVariable('Frurozin');
-        unsafeWindow.resourceShadow.addVariable('Gold');
-        unsafeWindow.resourceShadow.addVariable('RoheisenLagerCapacity');
-        unsafeWindow.resourceShadow.addVariable('KristallLagerCapacity');
-        unsafeWindow.resourceShadow.addVariable('FrubinLagerCapacity');
-        unsafeWindow.resourceShadow.addVariable('OrizinLagerCapacity');
-        unsafeWindow.resourceShadow.addVariable('FrurozinLagerCapacity');
-        unsafeWindow.resourceShadow.addVariable('GoldLagerCapacity');
+        let resources = { 'roheisen': unsafeWindow.Roheisen, 'kristall': unsafeWindow.Kristall, 'frubin': unsafeWindow.Frubin, 'orizin': unsafeWindow.Orizin, 'frurozin': unsafeWindow.Frurozin, 'gold': unsafeWindow.Gold }
+        let resourcesPerHour = unsafeWindow.getResourcePerHour()[0];
+        let resourcesCapacity = { 'roheisen': unsafeWindow.RoheisenLagerCapacity, 'kristall': unsafeWindow.KristallLagerCapacity, 'frubin': unsafeWindow.FrubinLagerCapacity, 'orizin': unsafeWindow.OrizinLagerCapacity, 'frurozin': unsafeWindow.FrurozinLagerCapacity, 'gold': unsafeWindow.GoldLagerCapacity };
 
-        unsafeWindow.resourcesUpdateFunc = unsafeWindow.resources.onmessage;
+        unsafeWindow.resourceStore = new Resources(resources, resourcesPerHour, resourcesCapacity, unsafeWindow.resources.onmessage);
 
         unsafeWindow.stopWorkerForResource();
         unsafeWindow.stopWorkerForResource = function() {};
 
-        let resources = { 'roheisen': unsafeWindow.Roheisen, 'kristall': unsafeWindow.Kristall, 'frubin': unsafeWindow.Frubin, 'orizin': unsafeWindow.Orizin, 'frurozin': unsafeWindow.Frurozin, 'gold': unsafeWindow.Gold }
+        unsafeWindow.jQuery(document).ajaxComplete((event, xhr, settings) => {
+            let page = undefined;
 
-        let resourcesPerHour = unsafeWindow.getResourcePerHour()[0];
-        unsafeWindow.resourceStore = new Resources(resources, resourcesPerHour);
-        unsafeWindow.resourceShadow.update();
+            if (settings.url.includes('/ajax_request/') ) {
+                page = settings.url.slice(settings.url.indexOf('/ajax_request/')+14, settings.url.indexOf('.php'));
+            }
 
+            if ( !page ) {
+                return;
+            }
 
-        unsafeWindow.resourceUpdateTimer = setInterval(updateResources, 1000);
-    }
+            let data = JSON.parse(xhr.responseText);
 
-    function updateResources() {
-        if (unsafeWindow.resourceShadow.hasChanged()) {
-            let resources = { 'roheisen': unsafeWindow.Roheisen, 'kristall': unsafeWindow.Kristall, 'frubin': unsafeWindow.Frubin, 'orizin': unsafeWindow.Orizin, 'frurozin': unsafeWindow.Frurozin, 'gold': unsafeWindow.Gold }
+            if (['put_building', 'cancel_building', 'put_new_trade_offer', 'delete_aktuelle_produktion', 'delete_trade_offer', 'accept_trade_offer', 'put_research', 'cancel_research', 'send_flotten'].includes(page)) {
+                let resources = {
+                    'roheisen': parseInt(data.roheisen || data.Roheisen),
+                    'kristall': parseInt(data.kristall || data.Kristall),
+                    'frubin': parseInt(data.frubin || data.Frubin),
+                    'orizin': parseInt(data.orizin || data.Orizin),
+                    'frurozin': parseInt(data.frurozin || data.Frurozin),
+                    'gold': parseInt(data.gold || data.Gold)
+                };
 
-            let resourcesPerHour = unsafeWindow.getResourcePerHour()[0];
-            unsafeWindow.resourceStore.setResources(resources, resourcesPerHour);
-        }
-        let r = unsafeWindow.resourceStore.getResources();
-        unsafeWindow.resourcesUpdateFunc({data: r});
-
-        unsafeWindow.resourceShadow.update();
+                unsafeWindow.resourceStore.setResources(resources, unsafeWindow.getResourcePerHour()[0]);
+            }
+        });
     }
 
 
